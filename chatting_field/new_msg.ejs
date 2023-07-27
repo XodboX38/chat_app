@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Message</title>
+    <style>
+        .all_users{
+            border: 1px solid black;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contacts{
+            border: 1px solid black;
+            margin: 10px;
+            padding-left:30px ;
+        }
+
+        .main_div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 180%;
+            overflow-x: scroll;
+        }
+        #all_users{
+            /* border: 2px solid black; */
+            width: 80%;
+            padding: 20px;
+
+        }
+
+        .nearby-user{
+            box-shadow: 0px 25px 22px -21px rgb(218, 218, 218);
+            padding-bottom: 20px;
+        }
+
+        body{
+    margin-top:20px;
+    background:#FAFAFA;    
+    }
+/*==================================================
+  Nearby People CSS
+  ==================================================*/
+
+.people-nearby .google-maps{
+  background: #f8f8f8;
+  border-radius: 4px;
+  border: 1px solid #f1f2f2;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.people-nearby .google-maps .map{
+  height: 300px;
+  width: 100%;
+  border: none;
+}
+
+.people-nearby .nearby-user{
+  padding: 20px 0;
+  border-top: 1px solid #f1f2f2;
+  border-bottom: 1px solid #f1f2f2;
+  margin-bottom: 20px;
+}
+
+img.profile-photo-lg{
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+}
+
+.my_success{
+    position: fixed;
+    margin-left: 30%;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="alert alert-success my_success" role="alert" id="my_success">
+            This is a success alert—check it out!
+          </div>
+
+        <div class="alert alert-danger my_success" role="alert" id="my_alert">
+        This is a danger alert—check it out!
+        </div>
+        <div class="row">
+            <a href="/" style="margin:0 0 10px 13%"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+                <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
+              </svg></a>
+              <h3 style="margin:0 0 10px 40%">Add to contact</h3>
+            <div class="col-md-8 main_div">
+                <div class="people-nearby" id="all_users">
+                  
+                  <!-- <div class="nearby-user">
+                    <div class="row" >
+                      <div class="col-md-2 col-sm-2">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user" class="profile-photo-lg">
+                      </div>
+                      <div class="col-md-7 col-sm-7">
+                        <h5>class="profile-link">Cris Haris</h5>
+                        <p>General Manager at Manager</p>
+                      </div>
+                      <div class="col-md-3 col-sm-3">
+                        <button class="btn btn-primary pull-right">Add Friend</button>
+                      </div>
+                    </div>
+                  </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+</body>
+<script>
+    var user_name = document.getElementById("user_name");
+    var user_email = document.getElementById("user_email");
+    var add_new_contact = document.getElementById("add_new_contact");
+    var all_users = document.getElementById("all_users");
+    const my_success = document.getElementById("my_success");
+    const my_alert = document.getElementById("my_alert");
+
+    my_success.style.display = "none";
+    my_alert.style.display = "none";
+
+    get_my_email(get_all_users);
+
+function get_my_email(callback){
+    var request = new XMLHttpRequest();
+    request.open("GET","/my_email");
+    request.send();
+     request.addEventListener("load",(data)=>{
+        if(data){
+            let my_details = JSON.parse(request.responseText);
+            let my_email = my_details[0].email;
+
+            console.log("My email:\t",my_details[0].email);
+            
+            let my_name = my_details[0].name;
+
+            console.log("My Name",my_details[0].name);
+            callback(my_email);
+        }
+        else{
+            console.log("Error occur in getting email");
+        }
+     })
+}
+
+    function get_all_users(my_email){
+        var request = new XMLHttpRequest();
+        request.open("get","/get_all_users");
+        request.setRequestHeader("content-type","application/json");
+        request.send();
+        request.addEventListener("load",function(data){
+            if(request.status === 200){
+                console.log("All users",JSON.parse(request.responseText));
+                let array = JSON.parse(request.responseText);
+                array.forEach(element => {
+                    if(element.email !== my_email){
+                        show_every_contacts(element.name,element.email);
+                    }
+                });
+            }
+            else{
+                alert("Error occur in getting data from userdata base");
+            }
+        })
+    }
+
+
+
+    function show_every_contacts(user, email){
+
+        var nearby_user = document.createElement("div");
+        nearby_user.classList.add("nearby-user");
+
+        var row = document.createElement("div");
+        row.classList.add("row");
+
+
+        var image_div = document.createElement("div");
+        image_div.classList.add("col-md-2");
+        image_div.classList.add("col-sm-2");
+        
+        var image = document.createElement("img");
+        image.classList.add("profile-photo-lg");
+        var randomnumber = Math.floor(Math.random() * (8 - 1 + 1)) + 1; 
+        image.src = `https://bootdey.com/img/Content/avatar/avatar${randomnumber}.png`;
+
+        image_div.appendChild(image);
+
+        row.appendChild(image_div);
+
+        var name_div = document.createElement("div");
+        name_div.classList.add("col-md-7");
+        name_div.classList.add("col-sm-7");
+
+        var user_name_div = document.createElement("h4");
+        user_name_div.classList.add("profile-link");
+        user_name_div.innerText = user;
+
+        name_div.appendChild(user_name_div);
+
+        var email_div = document.createElement("p");
+        email_div.innerText = email;
+
+        name_div.appendChild(email_div);
+
+        row.appendChild(name_div)
+
+        var new_div = document.createElement("div");
+        new_div.classList.add("col-md-3");
+        new_div.classList.add("col-sm-3");
+
+        var add_contact_btn = document.createElement("button");
+        add_contact_btn.classList.add("btn");
+        add_contact_btn.classList.add("btn-outline-success");
+        add_contact_btn.classList.add("pull-right");
+        add_contact_btn.innerText = "Add to contact";
+                  
+        new_div.appendChild(add_contact_btn);
+
+        row.appendChild(new_div);
+        
+        nearby_user.appendChild(row);
+
+        all_users.appendChild(nearby_user)
+
+
+        add_contact_btn.onclick = ()=>{
+            console.log("Email for add to contact",email)
+            check_for_existing_contact(user,email);
+        }
+    }
+
+    
+function check_for_existing_contact(user,email){
+    var request = new XMLHttpRequest();
+    request.open("GET",`/check_for_exixting_contact?email=${email}`);
+    request.send()
+
+    request.addEventListener("load",()=>{
+        if(request.status === 200){
+            request_for_add_contact(user,email);
+        }
+        else {
+            console.log("Already incontact");
+            my_alert.innerText = `${user} already in your contact`;
+            my_alert.style.display = "";
+
+            setTimeout(()=>{
+                my_alert.style.display = "none";
+            },3000)
+        }
+    }) 
+}
+
+
+
+    function request_for_add_contact(user,email){
+        console.log("request for add contact",user,email)
+        var request = new XMLHttpRequest();
+            request.open("POST","/add_new_contact");
+            request.setRequestHeader("content-type","application/json");
+            var body = JSON.stringify({
+                sender_name:user,
+                contact_email:email
+            })
+
+            request.send(body);
+            request.addEventListener("load",function(err,data){
+                if(err){
+                    console.log(err);
+                }
+                else{
+                    console.log("Add new contact worked");
+                    my_success.innerText = `${user} has been added to your contact`;
+                    my_success.style.display = "";
+
+                    setTimeout(()=>{
+                        my_success.style.display = "none";
+                    },3000)
+                }
+            })
+    }
+</script>
+</html>

@@ -1,0 +1,71 @@
+
+.all_users_in_db{
+    border: 2px solid brown;
+    display: flex;
+    flex-direction: row;
+}
+.all_users{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+
+.contacts{
+    border-bottom: 1px solid rgb(0, 0, 0);
+    margin: 10px;
+    padding-left:30px ;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    box-shadow: 0px 39px 16px -36px rgb(43, 43, 43);
+    margin-bottom: 20px;
+}
+
+.group_members{
+    border: 2px solid red;
+    width: 70%;
+    margin: 10px;
+}
+
+#chat3 .form-control {
+    border-color: transparent;
+    }
+    
+    #chat3 .form-control:focus {
+    border-color: transparent;
+    box-shadow: inset 0px 0px 0px 1px transparent;
+    }
+    
+    .badge-dot {
+    border-radius: 50%;
+    height: 10px;
+    width: 10px;
+    margin-left: 2.9rem;
+    margin-top: -.75rem;
+    }
+
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.groups_class{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;    
+}
+
+#alert{
+    margin-top: 40px;
+    margin-left: 40%;
+    position: fixed;
+    text-align: center;
+}
+
+#success{
+    text-align: center;
+}

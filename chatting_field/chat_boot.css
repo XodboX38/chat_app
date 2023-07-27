@@ -1,0 +1,163 @@
+#chat3 .form-control {
+    border-color: transparent;
+    }
+    
+    #chat3 .form-control:focus {
+    border-color: transparent;
+    box-shadow: inset 0px 0px 0px 1px transparent;
+    }
+    
+    .badge-dot {
+    border-radius: 50%;
+    height: 10px;
+    width: 10px;
+    margin-left: 2.9rem;
+    margin-top: -.75rem;
+    }
+
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+p{
+    cursor:pointer;
+}
+.disabled {
+    pointer-events:none; 
+}
+
+/* Follow me for more pens like this! */
+
+/* Tweak to change the look and feel */
+:root {
+    --button-background: dodgerblue;
+    --button-color: white;
+    
+    --dropdown-highlight: dodgerblue;
+    --dropdown-width: 120px;
+    --dropdown-background: rgb(243, 243, 243);
+    --dropdown-color: black;
+  }
+  
+  /* Boring button styles */
+  a.button2 {
+    /* Frame */
+    display: inline-block;
+    padding: 3px 14px;
+    border-radius: 50px;
+    box-sizing: border-box;
+    
+    /* Style */
+    border: none;
+    background: var(--button-background);
+    color: var(--button-color);
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  a.button2:active {
+    filter: brightness(75%);
+  }
+  
+  /* Dropdown styles */
+  .dropdown {
+    position: relative;
+    padding: 0;
+    margin-right: 0em;
+    
+    border: none;
+  }
+  
+  .dropdown summary {
+    list-style: none;
+    list-style-type: none;
+  }
+  
+  .dropdown > summary::-webkit-details-marker {
+    display: none;
+  }
+  
+  .dropdown summary:focus {
+    outline: none;
+  }
+  
+  .dropdown summary:focus a.button2 {
+    border: 2px solid white;
+  }
+  
+  .dropdown summary:focus {
+    outline: none;
+  }
+  
+  .dropdown ul {
+    position: absolute;
+    margin: 4px 0 0 0;
+    padding: 0px 0;
+    width: var(--dropdown-width);
+    left: 0%;
+    margin-left: calc((var(--dropdown-width) / 2)  * -1);
+    box-sizing: border-box;
+    z-index: 2;
+    
+    background: var(--dropdown-background);
+    border-radius: 6px;
+    list-style: none;
+    backdrop-filter: blur(30px);
+  }
+  
+  .dropdown ul li {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .dropdown ul li a:link, .dropdown ul li a:visited {
+    display: inline-block;
+    padding: 10px 0.8rem;
+    width: 100%;
+    box-sizing: border-box;
+    
+    color: var(--dropdown-color);
+    text-decoration: none;
+  }
+  
+  .dropdown ul li a:hover {
+    background-color: var(--dropdown-highlight);
+    color: var(--dropdown-background);
+  }
+  
+  /* Dropdown triangle */
+  .dropdown ul::before {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: -10px;
+    left: 50%;
+    margin-left: -10px;
+    border-style: solid;
+    border-width: 0 10px 10px 10px;
+    border-color: transparent transparent var(--dropdown-background) transparent;
+  }
+  
+  
+  /* Close the dropdown with outside clicks */
+  .dropdown > summary::before {
+    display: none;
+  }
+  
+  .dropdown[open] > summary::before {
+      content: ' ';
+      display: block;
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 1;
+  }
+  
+
+
+
