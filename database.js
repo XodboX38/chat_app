@@ -16,4 +16,4 @@ module.exports = function init(callback)
 }
 
 // mongodb+srv://madra:<password>@cluster0.qesiltm.mongodb.net/?retryWrites=true&w=majority
-// mongodb+srv://madra:uchiha@cluster0.qesiltm.mongodb.net/chat_app?retryWrites=true&w=majority
+
